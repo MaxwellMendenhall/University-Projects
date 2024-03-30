@@ -21,3 +21,5 @@
     \_\     |_/          ||
     `'"                  \_\
 </pre>
+
+da [Notes](https://maxwells-organization-2.gitbook.io/spring-2024-csc/ "Notes")
