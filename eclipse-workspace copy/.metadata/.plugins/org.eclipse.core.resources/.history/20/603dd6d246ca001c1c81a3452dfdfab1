@@ -1,0 +1,84 @@
+/*
+Given a linked list, remove the n-th node from the end of the list
+and return its head. In this program, you need to 
+(1) read 6 numbers, add the first 5 numbers in the linkedlist
+the last one is the index of the element that you need to remove
+(2) display the new linkedlist after removal
+Example 1:
+input:1,2,3,4,5,2
+output:head-->1-->2-->3-->5-->null
+Explanation: The original linkedlist is 1-->2-->3-->4-->5.
+The second node from the end is 4.
+After removing the second node from the end, the 
+linkedlist is 1->2->3->5 
+Please complete the following program to fullfil the function.
+*/
+import java.util.*;
+public class IndexRemoveProblem
+{
+   public static void main(String[] args)
+   {
+	  Scanner s = new Scanner(System.in);
+	  System.out.println("Enter list, last number is the position you want removed");
+		  
+      LinkedList removal = new LinkedList();
+      removal.head = new ListNode(1);
+      removal.head.next = new ListNode(2);
+      removal.head.next.next = new ListNode(3);
+      removal.head.next.next.next = new ListNode(4);
+      removal.head.next.next.next.next = new ListNode(5);
+      
+      int position = s.nextInt();
+      
+      //removal.head.next.next.next.next.next = new ListNode(2);
+      
+      System.out.println(removal);
+      
+      removeNthFromEnd(removal, position);
+      
+      System.out.println(removal);
+   }
+   public static void removeNthFromEnd(LinkedList llist, int n)
+   {
+	   //ListNode ref = llist.head;
+	   //ListNode previous = null;
+	   
+	   ListNode first = llist.head;
+	   ListNode second = llist.head;
+	   
+	   /*
+	    * See's if position is = to 0
+	    * if it is, remove head
+	    */
+	   /*
+	   if(n == 0) {
+		   llist.head = ref.next;
+	   }
+	   */
+	   
+	   /*
+	    * Iterators through the entire list, and when it reaches the tail node
+	    * if the next node is null, previous would hold the node before the tail node
+	    */
+	   for(int i = 0; i < n; i++) {
+		   if(second.next == null) {
+			   if(i == n - 1) {
+				   llist.head = llist.head.next;
+			   }
+		   }
+	   }
+	   /*
+		   while(ref.next != null) {
+			   previous = ref; //when ref.next is null, previous node will be the one before the tail
+			   ref = ref.next; //moves ref through the list 
+		   }
+		   			/*
+		   			LinkedList test = new LinkedList();
+		   			test.head = previous.next;
+		   			System.out.println(test);
+		   			*/
+		   //previous.next = null; //after the while loop is done and found the last node, remove the last node
+	   
+   }
+
+}

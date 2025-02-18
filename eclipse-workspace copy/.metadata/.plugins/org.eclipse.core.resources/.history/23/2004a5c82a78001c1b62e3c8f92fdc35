@@ -1,0 +1,164 @@
+package entities;
+
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+
+import first2dgame.Animation;
+import first2dgame.MyPanel;
+import first2dgame.Textures;
+
+
+public class Player
+{
+	boolean jumping=false, falling=false,left=false, right=false, up=false, down=false, idle=true;
+
+	private double JumpSpeed=5;
+	private double currentJumpSpeed=JumpSpeed;
+	
+	private double maxFallSpeed=5;
+	private double currentFallSpeed=0.1;
+	
+	private int velX=0;
+	private int velY=0;
+	private double x,y;
+	Textures tex = MyPanel.getTex();
+	private Animation playerIdle, playerWalk, wizIdle, wizRunRight, wizRunLeft, wizJump, wizFall;
+	
+    public Player(double x, double y)
+    {
+    	this.x=x;
+		this.y=y;
+		
+		wizFall=new Animation(10, tex.wizardf[0], tex.wizardf[1]);
+		wizJump=new Animation(10, tex.wizardj[0], tex.wizardj[1]);
+		wizRunLeft=new Animation(10, tex.wizardrl[0],tex.wizardrl[1],tex.wizardrl[2],tex.wizardrl[3],tex.wizardrl[4],tex.wizardrl[5],tex.wizardrl[6],tex.wizardrl[7]);
+		wizRunRight= new Animation(10, tex.wizardrr[0], tex.wizardrr[1], tex.wizardrr[2], tex.wizardrr[3], tex.wizardrr[4], tex.wizardrr[5], tex.wizardrr[6], tex.wizardrr[7]);
+		wizIdle=new Animation(10, tex.wizardi[0], tex.wizardi[1], tex.wizardi[2], tex.wizardi[3], tex.wizardi[4], tex.wizardi[5], tex.wizardi[6], tex.wizardi[7]);
+		playerWalk=new Animation(10, tex.player[4],tex.player[5],tex.player[6],tex.player[7]);
+		playerIdle=new Animation(10, tex.player[0], tex.player[1], tex.player[2], tex.player[3]);
+    }
+    public void draw(Graphics g)
+    {
+    	x+=velX;
+    	y+=velY;
+    	/**if(jumping) {
+    		wizJump.drawAnimation(g, (int)x, (int)y, 70, 82);
+    		}else {
+    			if(falling) {
+    				wizFall.drawAnimation(g, (int)x, (int)y, 65, 86);
+    			}else {
+    				if(!right && !left && !jumping && !falling)
+    					wizIdle.drawAnimation(g, (int)x, (int)y, 57, 99);
+    				if(right)
+    					wizRunRight.drawAnimation(g, (int)x, (int)y+35, 65, 62);
+    				if(left)
+    					wizRunLeft.drawAnimation(g, (int)x, (int)y+35, 65, 62);
+    			}
+
+    		}*/
+    	
+    	/**if(falling) {
+    		wizFall.drawAnimation(g, (int)x, (int)y, 65, 86);
+    	}else {
+    		if(right)
+				wizRunRight.drawAnimation(g, (int)x, (int)y+35, 65, 62);
+			if(left)
+				wizRunLeft.drawAnimation(g, (int)x, (int)y+35, 65, 62);
+    	}*/
+    	if(!right && !left && !jumping && !falling)
+    	{
+    		wizIdle.drawAnimation(g, (int)x, (int)y, 57, 99);
+    	}
+    	if(right) 
+    	{
+    		wizRunRight.drawAnimation(g, (int)x, (int)y+35, 65, 62);
+    	}
+    	if(left)
+    	{
+    		wizRunLeft.drawAnimation(g, (int)x, (int)y+35, 65, 62);
+    	}
+    	if(jumping)
+    	{
+    		wizJump.drawAnimation(g, (int)x, (int)y, 70, 82);
+    	}
+    	if(falling)
+    	{
+    		wizFall.drawAnimation(g, (int)x, (int)y, 65, 86);
+    	}
+        
+    }
+    public void tick()
+    {
+    	
+    	playerIdle.runAnimation();
+    	playerWalk.runAnimation();
+    	wizIdle.runAnimation();
+    	wizRunRight.runAnimation();
+    	wizRunLeft.runAnimation();
+    	wizJump.runAnimation();
+    	wizFall.runAnimation();
+    	
+        if(right)
+        {
+            //x+=3;
+        	velX=1;
+        }
+        if(left)
+        {
+            //x-=3;
+            velX=-1;
+        }
+        if(up)
+        {
+            //y-=3;
+        	velY=-1;
+        }
+        if(down)
+        {
+            //y+=3;
+        	velY=1;
+        }
+        if(jumping)
+        {
+        	y-=currentJumpSpeed;
+        	
+        	currentJumpSpeed-=.1;
+        		
+        	if(currentJumpSpeed<=0)
+        	{
+        		currentJumpSpeed = JumpSpeed;
+        		jumping=false;
+        		falling=true;
+        	}
+        }
+        if(falling)
+        {
+        	y+=currentFallSpeed;
+        	
+        	if(currentFallSpeed<maxFallSpeed)
+        	{
+        		currentFallSpeed+=.1;
+        	}
+        }
+        if(!falling)
+        {
+        	currentFallSpeed=.1;
+        }
+        
+    }
+    public void keyPressed(int k)
+    {
+        if(k==KeyEvent.VK_W) up=true; idle=false; 
+        if(k==KeyEvent.VK_S) down=true; idle=false;
+        if(k==KeyEvent.VK_A) left=true;idle=false;
+        if(k==KeyEvent.VK_D) right=true; idle=false; 
+        if(k==KeyEvent.VK_SPACE) jumping=true; idle=false;
+    }
+    public void keyReleased(int k)
+    {
+        if(k==KeyEvent.VK_W) up=false; idle=true;
+        if(k==KeyEvent.VK_S) down=false; idle=true;
+        if(k==KeyEvent.VK_A) left=false; idle=true;
+        if(k==KeyEvent.VK_D) right=false; idle=true;
+    }
+}

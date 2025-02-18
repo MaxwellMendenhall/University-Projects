@@ -1,0 +1,66 @@
+package main;
+
+public class Fraction {
+	private int numerator;
+	private int denominator;
+	
+	public Fraction(int n, int d) {
+		this.numerator=n;
+		this.denominator=d;
+		
+		/*
+		//this will get the lcd of both fractions and make the deno = to each other
+		int num1 = 5;
+		int num2 = 14;
+		int lcm = (6 * 15) / gcd(6, 15);
+		System.out.println(lcm);
+		num1 *= (lcm/6);
+		num2 *= (lcm/15);
+		int res_num = num1 + num2;
+        System.out.println( res_num + "/" + lcm);
+        */
+		
+		//gcd(numerator, denominator);
+		//toString();
+	}
+	//Euclid's Algorithm
+	//it gets the greatest common number that can be divided by both of numbers passed into the method
+	public static int gcd(int a, int b) {
+		if (b == 0) {
+            return (a);
+        } else {
+            return (gcd(b, a % b));
+        }
+	}
+	public String toString() {
+		
+		int answer = numerator/gcd(numerator, denominator); 
+		int answer1 = denominator/gcd(numerator, denominator);
+		
+		String end = Integer.toString(answer) + "/" + Integer.toString(answer1);
+		
+		return end;
+	}
+	public String toDecimal() {
+		
+		
+		
+		return null;
+	}
+	public Fraction add(Fraction f) {
+		
+		int lcm1 = (numerator/ gcd(numerator,denominator)*denominator);
+		//int fraction1 = (numerator * denominator)/gcd(numerator, denominator);
+		//int nume = (numerator * f.numerator);
+		//int nume = (numerator * f.denominator) + (f.numerator * denominator);
+		
+		//int fraction2 = (f.numerator * f.denominator)/gcd(f.numerator, f.denominator);
+		//int deno = (denominator * f.denominator);
+		//int deno = denominator * f.denominator;
+		
+		int nume = 1;
+		int deno = 1;
+		
+		return new Fraction(nume, deno);
+	}
+}

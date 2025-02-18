@@ -1,0 +1,27 @@
+package main;
+
+import java.util.Random;
+
+public class GPTree implements Collector {
+
+	public GPTree(OperatorFactory o, TerminalFactory t, int maxDepth, Random rand) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void crossover(GPTree gpt2, Random rand) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public GPTree eval(double[] data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void collect(Node node) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

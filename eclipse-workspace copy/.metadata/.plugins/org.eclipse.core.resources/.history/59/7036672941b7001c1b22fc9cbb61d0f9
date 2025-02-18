@@ -1,0 +1,16 @@
+package main;
+
+import java.util.Random;
+
+public class GPTree {
+
+	public GPTree(OperatorFactory o, TerminalFactory t, int maxDepth, Random rand) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void crossover(GPTree gpt2, Random rand) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
